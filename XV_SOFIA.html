@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Sofía Danie</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración de colores personalizados en Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        xvblue: {
+                            light: '#60a5fa',
+                            DEFAULT: '#1e3a8a', // Azul marino fuerte
+                            dark: '#172554',
+                        },
+                        xvgold: '#C0C0C0', // Plateado/Gris claro
+                    },
+                    fontFamily: {
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, rgba(30, 58, 138, 0.7), rgba(23, 37, 84, 0.9)), url('./foto-portada.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animaciones personalizadas */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Estilo para el reproductor de música flotante */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 font-sans overflow-x-hidden">
+
+    <!-- Reproductor de Música (Simulado) -->
+    <button id="musicToggle" class="music-btn bg-xvblue text-white rounded-full p-4 w-14 h-14 flex items-center justify-center transition hover:bg-xvblue-light floating">
+        <i class="fas fa-music"></i>
+    </button>
+    <audio id="bgMusic" loop>
+        <!-- Reemplaza esto con tu archivo de música o URL -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HERO SECTION -->
+    <header class="h-screen bg-hero-pattern bg-cover bg-center bg-fixed flex flex-col justify-center items-center text-center text-white px-4 relative">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-xvblue-dark opacity-90"></div>
+        
+        <div class="z-10 reveal active">
+            <p class="font-sans tracking-[0.2em] uppercase text-sm md:text-base mb-4 text-blue-200">Estás invitado a mis</p>
+            <h2 class="font-serif text-3xl md:text-5xl mb-8 text-blue-100">XV Años</h2>
+            <h1 class="font-script text-7xl md:text-9xl mb-2 text-white drop-shadow-lg">Sofía Danie</h1>
+            <div class="w-24 h-1 bg-blue-400 mx-auto mb-8 rounded-full"></div>
+            <p class="font-sans text-lg md:text-xl tracking-widest">SÁBADO 28 DE FEBRERO, 2026</p>
+        </div>
+
+        <div class="absolute bottom-10 animate-bounce z-10 text-white opacity-70">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- FRASE / PADRES -->
+    <section class="py-20 px-6 text-center max-w-4xl mx-auto bg-white shadow-xl rounded-lg -mt-10 relative z-20 reveal">
+        <i class="fas fa-crown text-4xl text-xvblue mb-6"></i>
+        <p class="font-serif text-xl md:text-2xl text-gray-600 leading-relaxed italic mb-8">
+            "Hay momentos inolvidables que se atesoran en el corazón para siempre, 
+            por esa razón quiero que compartas conmigo este día tan especial."
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 text-sm uppercase tracking-wide text-gray-500 font-semibold">
+            <div>
+                <p class="text-xvblue text-xs mb-1">Con la bendición de mis padres</p>
+                <p>Daniela Contreras Tudón</p>
+                <p>Daniel Villa González</p>
+            </div>
+            <div>
+                <p class="text-xvblue text-xs mb-1">Y mi padrino</p>
+                <p>Omar Contreras Tudón</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUENTA REGRESIVA -->
+    <section class="py-16 bg-xvblue-dark text-white text-center reveal">
+        <h3 class="font-serif text-3xl mb-10 text-blue-200">Falta poco para el gran día</h3>
+        <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 font-serif">
+            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg w-24 h-24 flex flex-col justify-center items-center border border-blue-400/30">
+                <span id="days" class="text-3xl font-bold">00</span>
+                <span class="text-xs uppercase tracking-wider mt-1">Días</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg w-24 h-24 flex flex-col justify-center items-center border border-blue-400/30">
+                <span id="hours" class="text-3xl font-bold">00</span>
+                <span class="text-xs uppercase tracking-wider mt-1">Hs</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg w-24 h-24 flex flex-col justify-center items-center border border-blue-400/30">
+                <span id="minutes" class="text-3xl font-bold">00</span>
+                <span class="text-xs uppercase tracking-wider mt-1">Min</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg w-24 h-24 flex flex-col justify-center items-center border border-blue-400/30">
+                <span id="seconds" class="text-3xl font-bold">00</span>
+                <span class="text-xs uppercase tracking-wider mt-1">Seg</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ITINERARIO / UBICACIÓN -->
+    <section class="py-20 px-4 max-w-6xl mx-auto">
+        <h2 class="text-center font-script text-6xl text-xvblue mb-16 reveal">Detalles del Evento</h2>
+        
+        <div class="grid md:grid-cols-2 gap-10">
+            <!-- Iglesia -->
+<!--            <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-xvblue text-center reveal transform hover:-translate-y-2 transition duration-300">-->
+<!--                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-xvblue">-->
+<!--                    <i class="fas fa-church text-2xl"></i>-->
+<!--                </div>-->
+<!--                <h3 class="font-serif text-2xl font-bold mb-2">Ceremonia Religiosa</h3>-->
+<!--                <p class="text-gray-500 mb-4 font-semibold">4:00 PM</p>-->
+<!--                <p class="text-gray-600 mb-6 px-4">Parroquia de San Cristóbal<br>Ecatepec Centro, Edo. Méx.</p>-->
+<!--                <a href="https://maps.google.com" target="_blank" class="inline-block bg-xvblue hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition text-sm">-->
+<!--                    <i class="fas fa-map-marker-alt mr-2"></i> Ver Ubicación-->
+<!--                </a>-->
+<!--            </div>-->
+
+            <!-- Recepción -->
+            <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-xvblue text-center reveal transform hover:-translate-y-2 transition duration-300">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-xvblue">
+                    <i class="fas fa-glass-cheers text-2xl"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold mb-2">Recepción</h3>
+                <p class="text-gray-500 mb-4 font-semibold">6:00 PM</p>
+                <p class="text-gray-600 mb-6 px-4">Eventos Luceros Coyoacán, Salón ANDROMEDA<br>Calz de la Virgen 1, Coapa, Presidentes Ejidales 2da Secc, Coyoacán, 04470 Ciudad de México, CDMX</p>
+                <a href="https://www.google.com.mx/maps/place/Eventos+Luceros+Coyoac%C3%A1n/@19.3207106,-99.1236277,18.81z/data=!4m15!1m8!3m7!1s0x85ce01935033f6fb:0xfdaea02ded92cedd!2sC.+S,+Coapa,+Alianza+Popular+Revolucionaria,+04800+Ciudad+de+M%C3%A9xico,+CDMX!3b1!8m2!3d19.3152294!4d-99.1172533!16s%2Fg%2F1tdyr3lc!3m5!1s0x85ce01c48c185183:0x72e943481b24437a!8m2!3d19.3210436!4d-99.1237971!16s%2Fg%2F1tdhm4n5?hl=es&entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="inline-block bg-xvblue hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition text-sm">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ver Ubicación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA (Placeholder) -->
+    <section class="py-10 bg-gray-100 reveal">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- Usando imágenes de placeholder azules -->
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-80 transition" alt="Foto 1">
+            <img src="https://images.unsplash.com/photo-1525268771113-32d9e9021a97?q=80&w=2080&auto=format&fit=crop" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-80 transition" alt="Foto 2">
+            <img src="https://images.unsplash.com/photo-1566737236500-c8ac43014a67?q=80&w=1740&auto=format&fit=crop" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-80 transition" alt="Foto 3">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover rounded-lg shadow-md hover:opacity-80 transition" alt="Foto 4">
+        </div>
+    </section>
+
+    <!-- CÓDIGO DE VESTIMENTA Y REGALOS -->
+    <section class="py-20 px-4 max-w-4xl mx-auto text-center">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="reveal">
+                <i class="fas fa-user-tie text-5xl text-gray-400 mb-4"></i>
+                <h3 class="font-serif text-2xl font-bold text-xvblue mb-2">Código de Vestimenta</h3>
+                <p class="text-gray-600 font-medium">Formal</p>
+                <p class="text-sm text-gray-500 mt-2">Rogamos reservar el color azul para la quinceañera.</p>
+            </div>
+            <div class="reveal">
+                <i class="fas fa-envelope-open-text text-5xl text-gray-400 mb-4"></i>
+                <h3 class="font-serif text-2xl font-bold text-xvblue mb-2">Regalos</h3>
+                <p class="text-gray-600">Lluvia de Sobres</p>
+                <p class="text-sm text-gray-500 mt-2">Tu presencia es mi mayor regalo, pero si deseas tener un detalle, habrá un buzón en la recepción.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP FOOTER -->
+    <footer class="bg-xvblue-dark text-white py-16 px-4 text-center relative overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <i class="fas fa-star absolute top-10 left-10 text-2xl animate-pulse"></i>
+            <i class="fas fa-star absolute bottom-10 right-10 text-xl animate-pulse" style="animation-delay: 1s;"></i>
+        </div>
+
+        <div class="relative z-10 max-w-lg mx-auto reveal">
+            <h2 class="font-script text-5xl mb-6">Confirmar Asistencia</h2>
+            <p class="mb-8 text-blue-200">Por favor confirma tu asistencia antes del 10 de Octubre para poder reservar tu lugar.</p>
+            
+            <!-- Botón de WhatsApp -->
+            <a href="https://wa.me/525512345678?text=Hola,%20muchas%20felicidades!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Valentina.%20Mi%20nombre%20es:" target="_blank" class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                <i class="fab fa-whatsapp text-2xl mr-3"></i>
+                Confirmar por WhatsApp
+            </a>
+            
+            <p class="mt-12 text-xs text-blue-400 font-sans">
+                &copy; 2025 Omar Contreras Tudón. Todos los derechos reservados. <br> Hecho con amor.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Lógica de Scroll Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+        // 2. Lógica de Cuenta Regresiva
+        // FECHA OBJETIVO: 25 Octubre 2025 (Cámbialo según necesites)
+        const targetDate = new Date('February 28, 2026 18:00:00').getTime();
+
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+            document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+            document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+
+            if (gap < 0) {
+                clearInterval(timer);
+                document.getElementById('countdown').innerHTML = "<h3 class='text-2xl font-serif'>¡El gran día ha llegado!</h3>";
+            }
+        }, 1000);
+
+        // 3. Lógica de Música
+        const musicBtn = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                musicBtn.classList.remove('bg-green-500');
+                musicBtn.classList.add('bg-xvblue');
+            } else {
+                bgMusic.play();
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                musicBtn.classList.remove('bg-xvblue');
+                musicBtn.classList.add('bg-green-500');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
